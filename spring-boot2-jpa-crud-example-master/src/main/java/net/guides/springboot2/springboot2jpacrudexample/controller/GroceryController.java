@@ -33,7 +33,7 @@ public class GroceryController {
 	}
 
 	@GetMapping("/groceries/{itemcode}")
-	public ResponseEntity<Grocery> getGroceryByItemCode(@PathVariable(value = "itemCode") Long groceryId)
+	public ResponseEntity<Grocery> getGroceryByItemCode(@PathVariable(value = "itemcode") Long groceryId)
 			throws ResourceNotFoundException {
 		Grocery grocery = groceryRepository.findById(groceryId)
 				.orElseThrow(() -> new ResourceNotFoundException("Grocery not found for this item code :: " + groceryId));
@@ -52,7 +52,7 @@ public class GroceryController {
 				.orElseThrow(() -> new ResourceNotFoundException("Grocery not found for this item code :: " + groceryId));
 
 		grocery.setItemName(groceryDetails.getItemName());
-		grocery.setItemCode(groceryDetails.getItemCode());
+		grocery.setAmount(groceryDetails.getAmount());
 		final Grocery updatedGrocery = groceryRepository.save(grocery);
 		return ResponseEntity.ok(updatedGrocery);
 	}
